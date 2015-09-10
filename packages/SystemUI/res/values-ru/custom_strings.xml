@@ -31,4 +31,17 @@
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Невозможно записать экран</string>
     <string name="notification_channel_screenrecord">Запись экрана</string>
+	
+    <!-- On The Go -->
+    <string name="onthego_notif_ticker">On-The-Go активирован</string>
+    <string name="onthego_notif_title">On-The-Go активен</string>
+    <string name="onthego_notif_stop">Стоп</string>
+    <string name="onthego_notif_options">Настройки</string>
+    <string name="onthego_notif_error">Невозможно запустить On-The-Go</string>
+    <string name="onthego_notif_restart">Перезагрузка On-The-Go</string>
+    <string name="onthego_notif_camera_changed">Режим камеры изменён</string>
+    <string name="onthego_transparency">Прозрачность</string>
+    <string name="onthego_front_camera">Фронтальная камера</string>
+    <string name="onthego_service_toggle">Автоматический рестарт сервиса</string>
+    <string name="onthego_channel_name">Главное</string>
 </resources>
