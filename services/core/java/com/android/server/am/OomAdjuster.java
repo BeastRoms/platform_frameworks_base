@@ -69,6 +69,7 @@ import android.os.PowerManagerInternal;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.util.ArrayMap;
@@ -163,8 +164,10 @@ public final class OomAdjuster {
     private final ProcessList mProcessList;
 
     // Process in same process Group keep in same cgroup
-    boolean mEnableProcessGroupCgroupFollow = false;
-    boolean mProcessGroupCgroupFollowDex2oatOnly = false;
+    boolean mEnableProcessGroupCgroupFollow =
+	        SystemProperties.getBoolean("ro.vendor.qti.cgroup_follow.enable", false);
+    boolean mProcessGroupCgroupFollowDex2oatOnly =
+	        SystemProperties.getBoolean("ro.vendor.qti.cgroup_follow.dex2oat_only", false);
 
     OomAdjuster(ActivityManagerService service, ProcessList processList, ActiveUids activeUids) {
         mService = service;
@@ -174,9 +177,6 @@ public final class OomAdjuster {
         mLocalPowerManager = LocalServices.getService(PowerManagerInternal.class);
         mConstants = mService.mConstants;
         mAppCompact = new AppCompactor(mService);
-
-            mEnableProcessGroupCgroupFollow = Boolean.parseBoolean(mPerf.perfGetProp("ro.vendor.qti.cgroup_follow.enable", "false"));
-            mProcessGroupCgroupFollowDex2oatOnly = Boolean.parseBoolean(mPerf.perfGetProp("ro.vendor.qti.cgroup_follow.dex2oat_only", "false"));
 
         // The process group is usually critical to the response time of foreground app, so the
         // setter should apply it as soon as possible.
