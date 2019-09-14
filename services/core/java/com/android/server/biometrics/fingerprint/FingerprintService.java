@@ -639,6 +639,13 @@ public class FingerprintService extends BiometricServiceBase {
             mHandler.post(() -> {
                 Fingerprint fp = new Fingerprint("", groupId, fingerId, deviceId);
                 FingerprintService.super.handleAuthenticated(fp, token);
+                if (mHasFod && fp.getBiometricId() != 0) {
+                    try {
+                        mStatusBarService.hideInDisplayFingerprintView();
+                    } catch (RemoteException e) {
+                        Slog.e(TAG, "hideInDisplayFingerprintView failed", e);
+                    }
+                }
             });
         }
 
